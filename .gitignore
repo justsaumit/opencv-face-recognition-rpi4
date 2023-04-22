@@ -1,4 +1,5 @@
 .venv/
 face-detection-caffe/
-face-detection/dataset/*
-face-detection/trainer/*
+face-detection/dataset/
+face-detection/trainer/
+lcd-ipaddress-display/drivers/__pycache__/
