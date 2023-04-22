@@ -22,7 +22,7 @@ while(True):
     k = cv2.waitKey(100) & 0xff # Press 'ESC' for exiting video
     if k == 27:
         break
-    elif count >= 30: # Take 30 face sample and stop video capture
+    elif count >= 100: # Take 30 face sample and stop video capture
          break
 # Do a bit of cleanup
 print("\n [INFO] Exiting Program and cleaning up stuff")

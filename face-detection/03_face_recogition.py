@@ -9,7 +9,7 @@ font = cv2.FONT_HERSHEY_COMPLEX
 #font = cv2.FONT_HERSHEY_TRIPLEX
 id = 0
 # names related to id
-names = ['None', 'Obamna', 'Soda', 'Orange'] 
+names = ['None', 'Junaid', 'Bikram', 'Saumit'] 
 # Initialize and start realtime video capture
 cam = cv2.VideoCapture(0)
 cam.set(3, 640) # set video widht
@@ -17,6 +17,7 @@ cam.set(4, 480) # set video height
 # Define min window size to be recognized as a face
 minW = 0.1*cam.get(3)
 minH = 0.1*cam.get(4)
+#reads frame, converts to grayscale, for each detected face it 
 while True:
     ret, img =cam.read()
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)

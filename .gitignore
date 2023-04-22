@@ -1,0 +1,4 @@
+.venv/
+face-detection-caffe/
+face-detection/dataset/*
+face-detection/trainer/*
