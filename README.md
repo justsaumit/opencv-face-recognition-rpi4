@@ -46,3 +46,11 @@ Using LCD 1602 I2C Screen to get the Local IP Address of the Raspberry Pi.
 
 ![Overall Setup](media/setup.png)
 Overall Setup
+
+## Wireless Adapter
+
+Command for checking whether driver for **Bus 001 Device 003: ID 2357:010c TP-Link TL-WN722N v2/v3 [Realtek RTL8188EUS]** wireless adapter is installed or not
+
+```yaml
+lsmod | grep 8188eu
+```
