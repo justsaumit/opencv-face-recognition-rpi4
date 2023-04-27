@@ -47,6 +47,24 @@ Using LCD 1602 I2C Screen to get the Local IP Address of the Raspberry Pi.
 ![Overall Setup](media/setup.png)
 Overall Setup
 
+## LCD 16x2 Screeen
+
+### Enable I2C Interface and VNC
+To enable the I2C interface on Raspberry Pi, you can use the following steps:
+
+1. Open the terminal on Raspberry Pi.
+2. Run the command 
+``` yaml
+sudo raspi-config.
+```
+3. Select "Interfacing Options".
+4. Select "VNC".
+5. Select "Yes" to enable VNC.
+6. Select "I2C".
+7. Select "Yes" to enable the interface.
+8. Reboot the Raspberry Pi.
+
+
 ## Wireless Adapter
 
 Command for checking whether driver for **Bus 001 Device 003: ID 2357:010c TP-Link TL-WN722N v2/v3 [Realtek RTL8188EUS]** wireless adapter is installed or not
