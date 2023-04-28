@@ -47,7 +47,22 @@ Using LCD 1602 I2C Screen to get the Local IP Address of the Raspberry Pi.
 ![Overall Setup](media/setup.png)
 Overall Setup
 
-## LCD 16x2 Screeen
+# Steps to follow post-installation
+
+## 1. Update mirrors
+Original repo does not hit so I changed the mirror
+``` bash
+sudo nano /etc/apt/sources.list
+```
+and replace "http://raspbian.raspberrypi.org/raspbian/" with any working mirror from [here](https://www.raspbian.org/RaspbianMirrors).
+
+## 2. Update & Upgrade Packages
+
+``` bash
+sudo apt update && sudo apt upgrade
+```
+
+## 3. Enable VNC and LCD 16x2 Screeen
 
 ### Enable I2C Interface and VNC
 To enable the I2C interface on Raspberry Pi, you can use the following steps:
