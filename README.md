@@ -1,4 +1,4 @@
-# Face Detection using OpenCV with Raspberry Pi
+# Face Recognition using OpenCV with Raspberry Pi
 
 ## Introduction
 
@@ -14,11 +14,11 @@ The Raspberry Pi acts as a wireless access point (WAP), connecting to it would a
 
 ## Flow
 
-1. **Hardware Setup**: Connect a Raspberry Pi camera module to the Raspberry Pi board. We have a portable Face Detection System consisting of Raspberry Pi 4B with a Camera Module. It is also connected to a Powerbank for power.
+1. **Hardware Setup**: Connect a Raspberry Pi camera module to the Raspberry Pi board. We have a portable Face Recognition System consisting of Raspberry Pi 4B with a Camera Module. It is also connected to a Powerbank for power.
 
 2. **Software Setup**: Install Required Libraries: Install the OpenCV library on the Raspberry Pi using the terminal command "pip install opencv-python".
 
-3. **Networking Setup**: Enable Wireless Access Point configuration (IEEE 802.11) and run the services SSH on port 22, VNC on port 5900, and WebUI at port 5000.
+3. **Networking Setup**: Enable Wireless Access Point configuration (IEEE 802.11) and run the services SSH on port 22, VNC on port 5900, and WebUI at port 80.
 
 4. **Face Detection**: Load the Haar Cascade Classifier haarcascade_frontalface_default.xml file using the cv2.CascadeClassifier() function.
 
@@ -30,7 +30,7 @@ The Raspberry Pi acts as a wireless access point (WAP), connecting to it would a
 
 8. **Display the Detected Faces**: Draw a rectangle around each detected face using the coordinates obtained and display the image using the cv2.imshow() function.
 
-9. **View Detected Faces**: The displayed detected faces can be viewed by VNC or WebUI using a live feed. Upon reaching the WebUI, users will be confronted with an Authentication portal allowing them to log in as either “admin” or “viewer” for Database management, and live-feed is accessible to all.
+9. **View Recognized Faces**: The displayed detected faces can be viewed by VNC or WebUI using a live feed. Upon reaching the WebUI, users will be confronted with an Authentication portal allowing them to log in as either “admin” or “viewer” for Database management, and live-feed is accessible to all.
 
 10. **Release Resources**: Release the video capture and destroy all windows using the cv2.release() and cv2.destroyAllWindows() functions, respectively.
 
@@ -97,11 +97,67 @@ It will show a glimpse on screen of what is detected by the camera module and th
 ``` bash
 libcamera-jpeg -o ~/Desktop/test.jpg
 ```
-The command **libcamera-jpeg** will capture a still image using the camera module and save it to a specif location with the filename as a JPEG file.
+The command **libcamera-jpeg** will capture a still image using the camera module and save it to a specified location as a JPEG file.
 
-<img src="media/test.jpg" alt="Test image of capy" height="500">
+<img src="media/test.jpg" alt="Test image of capy" height="450">
 
 **Test image taken by Raspberry Pi Camera Module**
+
+## 5. Testing the face-detection application
+
+Steps to Test the camera for the application
+1. Clone the opencv-face-detection repository from GitHub.
+``` bash
+git clone https://github.com/justsaumit/opencv-face-recogniton.git
+```
+2. Change to the opencv-face-detection directory.
+``` bash
+cd opencv-face-detection
+
+3. Change to the face-detection sub-directory.
+``` bash
+cd opencv-face-detection
+```
+4. Create a virtual environment named ".venv" for the project.
+``` bash
+python -m venv .venv
+```
+4. Activate the virtual environment.
+``` bash
+source .venv/bin/activate
+```
+5. Install the required Python packages using the "requirements.txt" file.
+``` bash
+pip install -r requirements.txt
+```
+
+6. Change to the parent directory of opencv-face-detection.
+``` bash
+cd ..
+```
+
+7. Run the "CamTest.py" script.
+``` bash
+python opencv-face-detection/CamTest.py
+```
+
+Once the script starts running, it will use your webcam to detect faces in the video feed.
+
+Press 'q' to quit the script.
+Press 'q' to stop the script when you are done.
+
+
+
+
+
+1. Change
+cd opencv-face-detection
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cd ..
+python CamTest.py
+
 
 ## Wireless Adapter
 
@@ -111,7 +167,7 @@ Command for checking whether driver for **Bus 001 Device 003: ID 2357:010c TP-Li
 lsmod | grep 8188eu
 ```
 # Challenges faced
-## Installing OpenCV on Raspberry Pi
+## Installing OpenCV on Raspberry Pi OS 32-bit
 We initially tried installing opencv package using pip on our Laptop(x86_64 cpu architecture) and it worked, however doing the same on Raspberry Pi didn't work out because there were no pre-built binaries(for ARM) and in order to compile the wheel it would take alot of time and after waiting for couple of hours we would be met with a build error. 
 We tried to resolve the errors and then waited more time for it to be done with compiling however we would face the same error regarding the wheel.
 So after some research, reading a Raspberry Pi forum we found another approach, that is to use the 64-bit version of Raspberry Pi OS than using the 32-bit variant.
