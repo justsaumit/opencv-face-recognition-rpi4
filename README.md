@@ -45,7 +45,7 @@ Initial trial- Using HaarCascade classifier for face detection and using LBPH(Lo
 Using LCD 1602 I2C Screen to get the Local IP Address of the Raspberry Pi.
 
 ![Overall Setup](media/setup.png)
-Overall Setup
+Overall Setup which is completely wireless.
 
 # Steps to follow post-installation
 
@@ -66,6 +66,7 @@ sudo reboot
 ```
 **Do note!** that updating the firmware carries some risks, and it's recommended to create a backup of your data before proceeding with the update (I recommend using sftp or rsync).  
 I am doing this for better performance, stability of the camera module.
+I'm not enabling Legacy camera support in raspi-config as for some reason when it's enabled it cuts off VNC and instead of showing the display output it shows ["Cannot currently show the desktop"](https://i.ytimg.com/vi/GnzRS3AgW5U/maxresdefault.jpg)
 
 ## 3. Enable VNC and LCD 16x2 Screeen
 
@@ -73,9 +74,9 @@ I am doing this for better performance, stability of the camera module.
 To enable the I2C interface on Raspberry Pi, you can use the following steps:
 
 1. Open the terminal on Raspberry Pi.
-2. Run the command 
-``` yaml
-sudo raspi-config.
+2. Run the command
+``` bash
+sudo raspi-config
 ```
 3. Select "Interfacing Options".
 4. Select "VNC".
@@ -84,6 +85,23 @@ sudo raspi-config.
 7. Select "Yes" to enable the interface.
 8. Reboot the Raspberry Pi.
 
+## 4. Testing the camera
+1. Open the terminal on Raspberry Pi.
+2. Run the command 
+``` bash
+libcamera-hello
+```
+The command **libcamera-hello** will print a message to the console indicating that the libcamera library is working correctly, and then it will exit. 
+It will show a glimpse on screen of what is detected by the camera module and then exit, it will not capture and save any images.
+3. Point the camera module to a stationary object and then run the following command
+``` bash
+libcamera-jpeg -o ~/Desktop/test.jpg
+```
+The command **libcamera-jpeg** will capture a still image using the camera module and save it to a specif location with the filename as a JPEG file.
+
+<img src="media/test.jpg" alt="Test image of capy" height="500">
+
+**Test image taken by Raspberry Pi Camera Module**
 
 ## Wireless Adapter
 
@@ -98,4 +116,3 @@ We initially tried installing opencv package using pip on our Laptop(x86_64 cpu 
 We tried to resolve the errors and then waited more time for it to be done with compiling however we would face the same error regarding the wheel.
 So after some research, reading a Raspberry Pi forum we found another approach, that is to use the 64-bit version of Raspberry Pi OS than using the 32-bit variant.
 This also eliminated the step of updating mirror.
-
