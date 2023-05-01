@@ -49,20 +49,38 @@ Overall Setup
 
 # Steps to follow post-installation
 
-## 1. Update mirrors
-Original repo does not hit so I changed the mirror
-``` bash
-sudo nano /etc/apt/sources.list
-```
-and replace "http://raspbian.raspberrypi.org/raspbian/" with any working mirror from [here](https://www.raspbian.org/RaspbianMirrors).
-
-## 2. Update & Upgrade Packages
+## 1. Update & Upgrade Packages
 
 ``` bash
 sudo apt update && sudo apt upgrade
 ```
 
-## 3. Enable VNC and LCD 16x2 Screeen
+## 2. Update firmware
+After ensuring that the operating system and packages are all up-to-date we can proceed with updating the firmware using-
+``` bash
+sudo rpi-update
+```
+Followed by a reboot
+``` bash
+sudo reboot
+```
+**Do note!** that updating the firmware carries some risks, and it's recommended to create a backup of your data before proceeding with the update (I recommend using sftp or rsync).  
+I am doing this for better performance, stability of the camera module.
+
+## 3. Enabling Legacy Camera Support
+Since I'm using the Raspberry Pi Camera Module v1.3 which a relatively older camera module, and it would require legacy camera support to work properly on newer Raspberry Pi model (in my case model 4B).
+This can be done by the following steps
+1. Open the terminal on Raspberry Pi.
+2. Run the command 
+``` bash
+sudo raspi-config.
+```
+3. Select "3. Interfacing Options".
+4. Select "Legacy Camera".
+5. Select "Yes" to enable Legacy Support.
+6. Reboot the Raspberry Pi.
+
+## 4. Enable VNC and LCD 16x2 Screeen
 
 ### Enable I2C Interface and VNC
 To enable the I2C interface on Raspberry Pi, you can use the following steps:
@@ -87,10 +105,10 @@ Command for checking whether driver for **Bus 001 Device 003: ID 2357:010c TP-Li
 ```yaml
 lsmod | grep 8188eu
 ```
-
+# Challenges faced
 ## Installing OpenCV on Raspberry Pi
-We initially tried installing opencv package using pip on our device and it worked, however doing the same on Raspberry Pi didn't work out because there were no pre-built binaries and in order to compile the wheel it would take alot of time and then give errors.   
-We tried to resolve the errors and then waited alot more time for it to end compiling however we would face the same error regharding the wheel.
-So we tried another approach reading a Raspberry Pi forum, to use the 64bit Raspberry Pi OS than using the 32-bit variant.
-Which also eliminated the step of updating mirror.
+We initially tried installing opencv package using pip on our Laptop(x86_64 cpu architecture) and it worked, however doing the same on Raspberry Pi didn't work out because there were no pre-built binaries(for ARM) and in order to compile the wheel it would take alot of time and after waiting for couple of hours we would be met with a build error. 
+We tried to resolve the errors and then waited more time for it to be done with compiling however we would face the same error regarding the wheel.
+So after some research, reading a Raspberry Pi forum we found another approach, that is to use the 64-bit version of Raspberry Pi OS than using the 32-bit variant.
+This also eliminated the step of updating mirror.
 
