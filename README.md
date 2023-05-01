@@ -47,6 +47,19 @@ Using LCD 1602 I2C Screen to get the Local IP Address of the Raspberry Pi.
 ![Overall Setup](media/setup.png)
 Overall Setup which is completely wireless.
 
+# TDL
+- [ ] make folder if it doesnt exists
+- [ ] Wifi Client + Acccess Point
+- [ ] hostapd - Wifi Driver (Ubuntu packs in Raspi?)
+- [ ] Dash Livestream using NGINX/Pipe output of FaceRecognizer window
+- [ ] WebUI Integration using Flask
+- [ ] Limitation of Flask
+- [ ] NGINX + Django
+- [ ] Login Authentication for Admin and Guest
+- [ ] Database Image viewing/Adding removing users
+- [ ] LBPH Improve
+- [ ] User Defined Exception on WebUI for easy troubleshooting
+
 # Steps to follow post-installation
 
 ## 1. Update & Upgrade Packages
@@ -138,25 +151,12 @@ cd ..
 
 7. Run the "CamTest.py" script.
 ``` bash
-python opencv-face-detection/CamTest.py
+python opencv-face-recognition/CamTest.py
 ```
-
 Once the script starts running, it will use your webcam to detect faces in the video feed.
 
-Press 'q' to quit the script.
-Press 'q' to stop the script when you are done.
-
-
-
-
-
-1. Change
-cd opencv-face-detection
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-cd ..
-python CamTest.py
+8. Press 'Esc' to quit the script.
+Press Escape key to stop the script when you are done.
 
 
 ## Wireless Adapter
