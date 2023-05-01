@@ -67,20 +67,7 @@ sudo reboot
 **Do note!** that updating the firmware carries some risks, and it's recommended to create a backup of your data before proceeding with the update (I recommend using sftp or rsync).  
 I am doing this for better performance, stability of the camera module.
 
-## 3. Enabling Legacy Camera Support
-Since I'm using the Raspberry Pi Camera Module v1.3 which a relatively older camera module, and it would require legacy camera support to work properly on newer Raspberry Pi model (in my case model 4B).
-This can be done by the following steps
-1. Open the terminal on Raspberry Pi.
-2. Run the command 
-``` bash
-sudo raspi-config.
-```
-3. Select "3. Interfacing Options".
-4. Select "Legacy Camera".
-5. Select "Yes" to enable Legacy Support.
-6. Reboot the Raspberry Pi.
-
-## 4. Enable VNC and LCD 16x2 Screeen
+## 3. Enable VNC and LCD 16x2 Screeen
 
 ### Enable I2C Interface and VNC
 To enable the I2C interface on Raspberry Pi, you can use the following steps:
