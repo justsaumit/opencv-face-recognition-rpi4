@@ -112,7 +112,7 @@ libcamera-jpeg -o ~/Desktop/test.jpg
 ```
 The command **libcamera-jpeg** will capture a still image using the camera module and save it to a specified location as a JPEG file.
 
-<img src="media/test.jpg" alt="Test image of capy" height="450">
+<img src="media/test.jpg" alt="Test image of capy" width="450" height="337.5">
 
 **Test image taken by Raspberry Pi Camera Module**
 
@@ -166,6 +166,10 @@ Command for checking whether driver for **Bus 001 Device 003: ID 2357:010c TP-Li
 ```yaml
 lsmod | grep 8188eu
 ```
+
+## NGINX RTMP
+Following this [blog](https://www.nginx.com/blog/video-streaming-for-remote-learning-with-nginx/) by NGINX I'm implementing Live-Feed
+
 # Challenges faced
 ## Installing OpenCV on Raspberry Pi OS 32-bit
 We initially tried installing opencv package using pip on our Laptop(x86_64 cpu architecture) and it worked, however doing the same on Raspberry Pi didn't work out because there were no pre-built binaries(for ARM) and in order to compile the wheel it would take alot of time and after waiting for couple of hours we would be met with a build error. 
