@@ -40,6 +40,9 @@ The LCD 1602 I2C screen is used to display the local IP address of the Raspberry
 
 This is the overall setup, which is completely wireless.
 
+![initial webui](media/webui_initial-look.png)
+the image above displays the initial view of our web user interface (webui).
+
 ## TDL
 
 - [ ]  Make folder if it doesn't exist.
