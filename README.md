@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project aims to develop a **portable** and **wireless** Face Recognition System (FRS) using Raspberry Pi with a Camera Module attachment. The Raspberry Pi is powered using a power-bank, enabling the development of a portable facial recognition system.   
+This project aims to develop a **portable** and **wireless** Face Recognition System (FRS) using Raspberry Pi with a Camera Module attachment. The Raspberry Pi is powered using a power-bank, enabling the development of a portable facial recognition system.  
 The project makes use of the **OpenCV** (Open-source Computer Vision) library, an open-source library for computer vision and machine learning tasks with contributions from more than a thousand developers.  
 We chose to use cascade classifier method specifically Haar cascade object detection for facial detection over TensorFlow due to less complexity, moderate performance, lower system requirements, and better integration.
 
@@ -15,98 +15,100 @@ The Raspberry Pi acts as a wireless access point (WAP), connecting to it would a
 ## Flow
 
 1. **Hardware Setup**: Connect a Raspberry Pi camera module to the Raspberry Pi board. We have a portable Face Recognition System consisting of Raspberry Pi 4B with a Camera Module. It is also connected to a Powerbank for power.
-
 2. **Software Setup**: Install Required Libraries: Install the OpenCV library on the Raspberry Pi using the terminal command "pip install opencv-python".
-
 3. **Networking Setup**: Enable Wireless Access Point configuration (IEEE 802.11) and run the services SSH on port 22, VNC on port 5900, and WebUI at port 80.
+4. **Face Detection**: Load the Haar Cascade Classifier haarcascade_frontalface_default.xml file using the `cv2.CascadeClassifier()` function.
+5. **Capture the Image**: Use OpenCV to capture the image from the Raspberry Pi camera module using the `cv2.VideoCapture()` function.
+6. **Preprocess the Image**: Convert the captured image to grayscale using the `cv2.cvtColor()` function to improve the efficiency of the face detection algorithm.
+7. **Detect Faces**: Use the `detectMultiScale()` function of the cascade classifier to detect faces in the grayscale image. It returns the coordinates of the bounding boxes.
+8. **Display the Detected Faces**: Draw a rectangle around each detected face using the coordinates obtained and display the image using the `cv2.imshow()` function.
+9. **View Recognized Faces**: The displayed detected faces can be viewed by VNC or WebUI using a live feed. Upon reaching the WebUI, users will be confronted with an Authentication portal allowing them to log in as either "admin" or "viewer" for Database management, and live-feed is accessible to all.
+10. **Release Resources**: Release the video capture and destroy all windows using the `cv2.release()` and `cv2.destroyAllWindows()` functions, respectively.
 
-4. **Face Detection**: Load the Haar Cascade Classifier haarcascade_frontalface_default.xml file using the cv2.CascadeClassifier() function.
-
-5. **Capture the Image**: Use OpenCV to capture the image from the Raspberry Pi camera module using the cv2.VideoCapture() function.
-
-6. **Preprocess the Image**: Convert the captured image to grayscale using the cv2.cvtColor() function to improve the efficiency of the face detection algorithm.
-
-7. **Detect Faces**: Use the detectMultiScale() function of the cascade classifier to detect faces in the grayscale image. It returns the coordinates of the bounding boxes.
-
-8. **Display the Detected Faces**: Draw a rectangle around each detected face using the coordinates obtained and display the image using the cv2.imshow() function.
-
-9. **View Recognized Faces**: The displayed detected faces can be viewed by VNC or WebUI using a live feed. Upon reaching the WebUI, users will be confronted with an Authentication portal allowing them to log in as either “admin” or “viewer” for Database management, and live-feed is accessible to all.
-
-10. **Release Resources**: Release the video capture and destroy all windows using the cv2.release() and cv2.destroyAllWindows() functions, respectively.
 
 ## Progression
 
 ![Initial Trial](media/initial_trial.png)
 
-Initial trial- Using HaarCascade classifier for face detection and using LBPH(Local Binary Patterns Histograms) recognizer for training the model.
+Initial trial, we utilized the HaarCascade classifier for face detection and trained the model using LBPH (Local Binary Patterns Histograms) recognizer.
 
 ![LCD Screen](media/lcd_screen.png)
 
-Using LCD 1602 I2C Screen to get the Local IP Address of the Raspberry Pi.
+The LCD 1602 I2C screen is used to display the local IP address of the Raspberry Pi.
 
 ![Overall Setup](media/setup.png)
-Overall Setup which is completely wireless.
 
-# TDL
-- [ ] make folder if it doesnt exists
-- [ ] Wifi Client + Acccess Point
-- [ ] hostapd - Wifi Driver (Ubuntu packs in Raspi?)
-- [ ] Dash Livestream using NGINX/Pipe output of FaceRecognizer window
-- [ ] WebUI Integration using Flask
-- [ ] Limitation of Flask
-- [ ] NGINX + Django
-- [ ] Login Authentication for Admin and Guest
-- [ ] Database Image viewing/Adding removing users
-- [ ] LBPH Improve
-- [ ] User Defined Exception on WebUI for easy troubleshooting
+This is the overall setup, which is completely wireless.
 
-# Steps to follow post-installation
+## TDL
 
-## 1. Update & Upgrade Packages
+- [ ]  Make folder if it doesn't exist.
+- [ ]  Set up WiFi client and access point.
+- [ ]  Install hostapd - WiFi driver (Ubuntu packs in Raspi?)
+- [ ]  Use NGINX/pipe output of FaceRecognizer window for Dash Livestream.
+- [ ]  Integrate Flask for WebUI.
+- [ ]  Address the limitations of Flask.
+- [ ]  Use NGINX + Django.
+- [ ]  Implement login authentication for admin and guest.
+- [ ]  View, add, and remove users from the database.
+- [ ]  Improve LBPH.
+- [ ]  Implement user-defined exception on WebUI for easy troubleshooting.
+
+# Steps to Follow Post-Installation
+
+## 1. Update and Upgrade Packages
 
 ``` bash
 sudo apt update && sudo apt upgrade
 ```
 
-## 2. Update firmware
-After ensuring that the operating system and packages are all up-to-date we can proceed with updating the firmware using-
+## 2. Update Firmware
+
+After ensuring that the operating system and packages are all up-to-date, we can proceed with updating the firmware using:
+
 ``` bash
 sudo rpi-update
 ```
-Followed by a reboot
+
+Followed by a reboot:
+
 ``` bash
 sudo reboot
 ```
-**Do note!** that updating the firmware carries some risks, and it's recommended to create a backup of your data before proceeding with the update (I recommend using sftp or rsync).  
-I am doing this for better performance, stability of the camera module.
-I'm not enabling Legacy camera support in raspi-config as for some reason when it's enabled it cuts off VNC and instead of showing the display output it shows ["Cannot currently show the desktop"](https://i.ytimg.com/vi/GnzRS3AgW5U/maxresdefault.jpg)
 
-## 3. Enable VNC and LCD 16x2 Screeen
+**Note**: Updating the firmware carries some risks, and it's recommended to create a backup of your data before proceeding with the update (I recommend using sftp or rsync). I am doing this for better performance and stability of the camera module.  
+I'm not enabling Legacy camera support in raspi-config as, for some reason, when it's enabled, it cuts off VNC, and instead of showing the display output, it shows ["Cannot currently show the desktop"](https://i.ytimg.com/vi/GnzRS3AgW5U/maxresdefault.jpg).
+
+## 3. Enable VNC and LCD 16x2 Screen
 
 ### Enable I2C Interface and VNC
-To enable the I2C interface on Raspberry Pi, you can use the following steps:
 
-1. Open the terminal on Raspberry Pi.
-2. Run the command
+To enable the I2C interface on Raspberry Pi, follow these steps:
+
+1.  Open the terminal on Raspberry Pi.
+2.  Run the command:
+
 ``` bash
 sudo raspi-config
 ```
-3. Select "Interfacing Options".
-4. Select "VNC".
-5. Select "Yes" to enable VNC.
-6. Select "I2C".
-7. Select "Yes" to enable the interface.
-8. Reboot the Raspberry Pi.
 
-## 4. Testing the camera
-1. Open the terminal on Raspberry Pi.
-2. Run the command 
+3.  Select "Interfacing Options".
+4.  Select "VNC".
+5.  Select "Yes" to enable VNC.
+6.  Select "I2C".
+7.  Select "Yes" to enable the interface.
+8.  Reboot the Raspberry Pi.
+
+## 4. Testing the Camera
+
+1.  Open the terminal on Raspberry Pi.
+2.  Run the command:
 ``` bash
 libcamera-hello
 ```
-The command **libcamera-hello** will print a message to the console indicating that the libcamera library is working correctly, and then it will exit. 
-It will show a glimpse on screen of what is detected by the camera module and then exit, it will not capture and save any images.
-3. Point the camera module to a stationary object and then run the following command
+The command **libcamera-hello** will print a message to the console indicating that the libcamera library is working correctly, and then it will exit. It will show a glimpse on the screen of what is detected by the camera module and then exit; it will not capture and save any images.
+
+3.  Point the camera module to a stationary object and then run the following command:
 ``` bash
 libcamera-jpeg -o ~/Desktop/test.jpg
 ```
@@ -116,13 +118,15 @@ The command **libcamera-jpeg** will capture a still image using the camera modul
 
 **Test image taken by Raspberry Pi Camera Module**
 
-## 5. Testing the face-detection application
+## 5. Testing the Face-Recognition Application
 
-Steps to Test the camera for the application
-1. Clone the opencv-face-detection repository from GitHub.
+To test the camera for the application, follow these steps:
+
+1.  Clone the opencv-face-recognition repository from GitHub.
 ``` bash
-git clone https://github.com/justsaumit/opencv-face-recogniton.git
+git clone https://github.com/justsaumit/opencv-face-recognition
 ```
+
 2. Change to the opencv-face-detection directory.
 ``` bash
 cd opencv-face-detection
@@ -144,7 +148,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-6. Change to the parent directory of opencv-face-detection.
+6. Change to the parent directory of opencv-face-recognition.
 ``` bash
 cd ..
 ```
@@ -163,7 +167,7 @@ Press Escape key to stop the script when you are done.
 
 Command for checking whether driver for **Bus 001 Device 003: ID 2357:010c TP-Link TL-WN722N v2/v3 [Realtek RTL8188EUS]** wireless adapter is installed or not
 
-```yaml
+```bash
 lsmod | grep 8188eu
 ```
 
