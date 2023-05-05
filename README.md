@@ -119,7 +119,7 @@ The command **libcamera-jpeg** will capture a still image using the camera modul
 
 <img src="media/test.jpg" alt="Test image of capy" width="300" height="225">
 
-**Test image taken by Raspberry Pi Camera Module**
+**Test image taken by Raspberry Pi Camera Module** (Click on it for full-size)
 
 ## 5. Testing the Face-Recognition Application
 
@@ -133,6 +133,7 @@ git clone https://github.com/justsaumit/opencv-face-recognition
 2. Change to the opencv-face-detection directory.
 ``` bash
 cd opencv-face-detection
+```
 
 3. Change to the face-detection sub-directory.
 ``` bash
