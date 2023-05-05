@@ -117,7 +117,7 @@ libcamera-jpeg -o ~/Desktop/test.jpg
 ```
 The command **libcamera-jpeg** will capture a still image using the camera module and save it to a specified location as a JPEG file.
 
-<img src="media/test.jpg" alt="Test image of capy" width="450" height="337.5">
+<img src="media/test.jpg" alt="Test image of capy" width="300" height="225">
 
 **Test image taken by Raspberry Pi Camera Module**
 
