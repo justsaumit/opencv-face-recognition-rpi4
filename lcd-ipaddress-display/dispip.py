@@ -13,8 +13,8 @@ try:
     while True:
         display.lcd_display_string("IP Address: ", 1)
         display.lcd_display_string(str(IP), 2)  # Display the IP address on the second line
-        # sleep(1)  # Uncomment the following line to loop with 1 sec delay
 except KeyboardInterrupt:
     # If there is a KeyboardInterrupt (when you press ctrl+c), exit the program and cleanup
+    sleep(.2)
     print("Cleaning up!")
     display.lcd_clear()
