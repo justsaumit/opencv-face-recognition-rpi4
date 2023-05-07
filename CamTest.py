@@ -1,9 +1,10 @@
 import cv2
 from picamera2 import Picamera2
-# Setting the video capture source to default (0)
+
+# Create an instance of the PiCamera2 object
 cam = Picamera2()
 
-# Setting the resolution of the video capture
+# Set the resolution of the camera preview
 cam.preview_configuration.main.size = (1280,720)
 cam.preview_configuration.main.format = "RGB888"
 cam.preview_configuration.align()
@@ -12,7 +13,7 @@ cam.start()
 
 # While loop to continuously capture frames from camera
 while True:
-    # Read a frame from the camera
+    # Capture a frame from the camera
     frame=cam.capture_array()
 
     # Convert frame from BGR to grayscale
@@ -24,6 +25,7 @@ while True:
     
     # Wait for 30 milliseconds for a key event (extract sigfigs) and exit if 'ESC' or 'q' is pressed
     key = cv2.waitKey(30) & 0xff
+    #Checking keycode
     if key == 27:  # ESCAPE key
         break
     elif key == 113:  # q key
