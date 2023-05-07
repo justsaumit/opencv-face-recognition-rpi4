@@ -160,12 +160,15 @@ sudo apt install -y python3-picamera2
 ``` bash
 cd ..
 ```
-
 8. Run the "CamTest.py" script.
 ``` bash
 python CamTest.py
 ```
-Once the script starts running, it will use the Camera Module to show the captured frames.
+Once the script starts running, it will use the Camera Module to show the captured frames in BGR and Greyscale.
+
+<img src="media/camtest.png" alt="Output of running CamTest.py script">
+
+**Output of running CamTest.py script**
 
 9. Press 'Esc' or 'q' to quit the script.
 Press Escape key or q to stop the script when you are done.
