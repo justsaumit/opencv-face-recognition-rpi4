@@ -5,7 +5,7 @@ from picamera2 import Picamera2
 cam = Picamera2()
 
 # Set the resolution of the camera preview
-cam.preview_configuration.main.size = (1280,720)
+cam.preview_configuration.main.size = (640, 360)
 cam.preview_configuration.main.format = "RGB888"
 cam.preview_configuration.align()
 cam.configure("preview")
