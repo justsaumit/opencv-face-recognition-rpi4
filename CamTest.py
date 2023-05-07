@@ -1,17 +1,20 @@
 import cv2
-
+from picamera2 import Picamera2
 # Setting the video capture source to default (0)
-cap = cv2.VideoCapture(0)
+cam = Picamera2()
 
 # Setting the resolution of the video capture
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+cam.preview_configuration.main.size = (1280,720)
+cam.preview_configuration.main.format = "RGB888"
+cam.preview_configuration.align()
+cam.configure("preview")
+cam.start()
 
 # While loop to continuously capture frames from camera
 while True:
     # Read a frame from the camera
-    ret, frame = cap.read()
-    #frame = cv2.flip(frame, -1) # Flip camera vertically
+    frame=cam.capture_array()
+
     # Convert frame from BGR to grayscale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
@@ -27,5 +30,5 @@ while True:
         break
 
 # Release the camera and close all windows
-cap.release()
+cam.release()
 cv2.destroyAllWindows()
