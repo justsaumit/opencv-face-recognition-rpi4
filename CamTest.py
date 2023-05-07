@@ -32,5 +32,5 @@ while True:
         break
 
 # Release the camera and close all windows
-cam.release()
+cam.stop()
 cv2.destroyAllWindows()
