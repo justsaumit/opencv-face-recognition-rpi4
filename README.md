@@ -143,32 +143,32 @@ cd opencv-face-detection
 ``` bash
 python -m venv .venv
 ```
-4. Activate the virtual environment.
+5. Activate the virtual environment.
 ``` bash
 source .venv/bin/activate
 ```
-5. Install the required Python packages using the "requirements.txt" file.
+6. Install the required Python packages using the "requirements.txt" file.
 ``` bash
 pip install -r requirements.txt
 ```
-*Note!* Picamera2 is recommended to install using apt. Hence, till it's stable version is not released it won't be included in requirements.txt. Read more [here](https://pypi.org/project/picamera2/)
+**Note!** Picamera2 is recommended to install using apt. Hence, till it's stable version is not released it won't be included in requirements.txt. Read more [here](https://pypi.org/project/picamera2/)  
 Use the following command to install Picamera2
 ``` bash
 sudo apt install -y python3-picamera2
 ```
-6. Change to the parent directory of opencv-face-recognition.
+7. Change to the parent directory of opencv-face-recognition.
 ``` bash
 cd ..
 ```
 
-7. Run the "CamTest.py" script.
+8. Run the "CamTest.py" script.
 ``` bash
 python CamTest.py
 ```
 Once the script starts running, it will use the Camera Module to show the captured frames.
 
-8. Press 'Esc' or 'q' to quit the script.
-Press Escape key or qto stop the script when you are done.
+9. Press 'Esc' or 'q' to quit the script.
+Press Escape key or q to stop the script when you are done.
 
 ## 6. Install dependencies and test the LCD1602 LCD Display with I2C
 
