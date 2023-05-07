@@ -121,7 +121,35 @@ The command **libcamera-jpeg** will capture a still image using the camera modul
 
 **Test image taken by Raspberry Pi Camera Module** (Click on it for full-size)
 
-## 5. Testing the Face-Recognition Application
+## 5. Install dependencies and test the LCD1602 LCD Display with I2C
+
+1. Install the libraries and i2cctools package
+```bash
+sudo apt install i2c-tools libi2c-dev
+```
+2. Enter the lcd-ipaddress-display subdirectory in this project
+```bash
+cd lcd-ipaddress-display
+```
+3. Install python modules `smbus` and `RPi.GPIO` to communicate with I2C devices using python scripts
+```bash
+pip install smbus RPi.GPIO
+```
+OR
+```bash
+pip install -r requirements.txt
+```
+4. Execute the python script to display Local IP Address:
+```bash
+python dispip.py
+```
+**Note:** The python script will only work correctly when it is located in the lcd-ipaddress-display directory, as the drivers directory is imported in the code as a library.
+
+<img src="media/lcddisplay-test.jpg" alt="Test image of LCD display showing the Local IP Address">
+
+**Test image of LCD display in the setup showing the Local IP Address**
+
+## 6. Testing the Face-Recognition Application
 
 To test the camera for the application, follow these steps:
 
