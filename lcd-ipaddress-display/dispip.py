@@ -15,6 +15,6 @@ try:
         display.lcd_display_string(str(IP), 2)  # Display the IP address on the second line
 except KeyboardInterrupt:
     # If there is a KeyboardInterrupt (when you press ctrl+c), exit the program and cleanup
-    sleep(.2)
     print("Cleaning up!")
+    sleep(.4)
     display.lcd_clear()
