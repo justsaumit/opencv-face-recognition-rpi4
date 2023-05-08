@@ -139,22 +139,27 @@ cd opencv-face-detection
 ``` bash
 cd face-detection
 ```
-4. Create a virtual environment named ".venv" for the project.
+4. Install the dependencies
+System dependencies
 ``` bash
-python -m venv .venv
+sudo apt install -y python3-libcamera python3-kms++ libcap-dev
 ```
-5. Activate the virtual environment.
-``` bash
-source .venv/bin/activate
-```
-6. Install the required Python packages using the "requirements.txt" file.
+**Note!:** libcamera won't work if you're using virtual environment since it's a lowlevel library that cannot be install using pip
+Then pip dependencies
 ``` bash
 pip install -r requirements.txt
 ```
-**Note!** Picamera2 is recommended to install using apt. Hence, till it's stable version is not released it won't be included in requirements.txt. Read more [here](https://pypi.org/project/picamera2/).  
-Use the following command to install Picamera2:
+OR Manually
 ``` bash
-sudo apt install -y python3-picamera2
+pip install opencv-python picamera2
+```
+**Note!** If you face error installing Picamera2 using pip make sure you have the following dependency installed:
+``` bash
+sudo apt install -y libcap-dev
+```
+If you still face error and unable to install, you may install opencv and picamera2 using apt with the following command:
+``` bash
+sudo apt install -y python3-opencv python3-picamera2
 ```
 7. Change to the parent directory -opencv-face-recognition.
 ``` bash
