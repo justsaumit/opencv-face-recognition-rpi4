@@ -1,68 +1,80 @@
 import cv2
-import numpy as np
 import os 
+import numpy as np
+from picamera2 import Picamera2
+
+#Parameters
+id = 0
+font = cv2.FONT_HERSHEY_COMPLEX
+height=1
+boxColor=(0,0,255)      #BGR- GREEN
+nameColor=(255,255,255) #BGR- WHITE
+confColor=(255,255,0)   #BGR- TEAL
+
+face_detector=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('trainer/trainer.yml')
-cascadePath = "haarcascade_frontalface_default.xml"
-faceCascade = cv2.CascadeClassifier(cascadePath);
-font = cv2.FONT_HERSHEY_COMPLEX
-#font = cv2.FONT_HERSHEY_TRIPLEX
-id = 0
 # names related to id
-names = ['None', 'Junaid', 'Bikram', 'Saumit'] 
-# Initialize and start realtime video capture
-cam = cv2.VideoCapture(0)
-cam.set(3, 640) # set video widht
-cam.set(4, 480) # set video height
-# Define min window size to be recognized as a face
-minW = 0.1*cam.get(3)
-minH = 0.1*cam.get(4)
-#reads frame, converts to grayscale, for each detected face it 
+names = ['None', 'Saumit', 'Bikram', 'Junaid']
+
+# Create an instance of the PiCamera2 object
+cam = Picamera2()
+## Initialize and start realtime video capture
+# Set the resolution of the camera preview
+cam.preview_configuration.main.size = (640, 360)
+cam.preview_configuration.main.format = "RGB888"
+cam.preview_configuration.controls.FrameRate=30
+cam.preview_configuration.align()
+cam.configure("preview")
+cam.start()
+
 while True:
-    ret, img =cam.read()
-    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    
-    faces = faceCascade.detectMultiScale( 
-        gray,
-        scaleFactor = 1.2,
-        minNeighbors = 5,
-        minSize = (int(minW), int(minH)),
-       )
+    # Capture a frame from the camera
+    frame=cam.capture_array()
+
+    #Convert fram from BGR to grayscale
+    frameGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    #Create a DS faces- array with 4 elements- x,y coordinates top-left corner), width and height
+    faces = face_detector.detectMultiScale(
+            frameGray,      # The grayscale frame to detect
+            scaleFactor=1.1,# how much the image size is reduced at each image scale-10% reduction
+            minNeighbors=5, # how many neighbors each candidate rectangle should have to retain it
+            minSize=(150, 150)# Minimum possible object size. Objects smaller than this size are ignored.
+            )
     for(x,y,w,h) in faces:
-        cv2.rectangle(img, (x,y), (x+w,y+h), (0,255,0), 2)
-        id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
+        namepos=(x+5,y-5) #shift right and up/outside the bounding box from top
+        confpos=(x+5,y+h-5) #shift right and up/intside the bounding box from bottom
+        #create a bounding box across the detected face
+        cv2.rectangle(frame, (x,y), (x+w,y+h), boxColor, 3) #5 parameters - frame, topleftcoords,bottomrightcooords,boxcolor,thickness
+
+        #recognizer.predict() method takes the ROI as input and
+        #returns the predicted label (id) and confidence score for the given face region.
+        id, confidence = recognizer.predict(frameGray[y:y+h,x:x+w])
         
-        # If confidence is less them 100 ==> "0" : perfect match 
-        if (confidence < 100):
+        # If confidence is less than 100, it is considered a perfect match
+        if confidence < 100:
             id = names[id]
-            confidence = "  {0}%".format(round(100 - confidence))
+            confidence = f"{100 - confidence:.0f}%"
         else:
             id = "unknown"
-            confidence = "  {0}%".format(round(100 - confidence))
-        
-        cv2.putText(
-                    img, 
-                    str(id), 
-                    (x+5,y-5), 
-                    font, 
-                    1, 
-                    (255,255,255), 
-                    2
-                   )
-        cv2.putText(
-                    img, 
-                    str(confidence), 
-                    (x+5,y+h-5), 
-                    font, 
-                    1, 
-                    (255,255,0), 
-                    1
-                   )  
-    
-    cv2.imshow('camera',img) 
-    k = cv2.waitKey(10) & 0xff # Press 'ESC' for exiting video
-    if k == 27:
+            confidence = f"{100 - confidence:.0f}%"
+
+        #Display name and confidence of person who's face is recognized
+        cv2.putText(frame, str(id), namepos, font, height, nameColor, 2)
+        cv2.putText(frame, str(confidence), confpos, font, height, confColor, 1)
+
+    # Display realtime capture output to the user
+    cv2.imshow('Raspi Face Recognizer',frame)
+
+    # Wait for 30 milliseconds for a key event (extract sigfigs) and exit if 'ESC' or 'q' is pressed
+    key = cv2.waitKey(100) & 0xff
+    #Checking keycode
+    if key == 27:  # ESCAPE key
         break
+    elif key == 113:  # q key
+        break
+
+# Release the camera and close all windows
 print("\n [INFO] Exiting Program and cleaning up stuff")
-cam.release()
+cam.stop()
 cv2.destroyAllWindows()
