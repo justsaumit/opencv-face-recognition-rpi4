@@ -6,10 +6,11 @@ from picamera2 import Picamera2
 count = 0
 pos=(30,60) #top-left
 font=cv2.FONT_HERSHEY_COMPLEX
-height=1.5
-color=(0,0,255) #BGR- RED
-weight=3
-face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+height=1.5 #font_scale
+textcolor=(0,0,255) #BGR- RED
+boxcolor=(255,0,255) #BGR- BLUE
+weight=3   #font-thickness
+face_detector=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 # For each person, enter one numeric face id
 face_id = input('\n----Enter User-id and press <return>----')
@@ -29,7 +30,7 @@ while True:
     # Capture a frame from the camera
     frame=cam.capture_array()
     #Display count of images taken
-    cv2.putText(frame,'Count:'+str(int(count)),pos,font,height,color,weight)
+    cv2.putText(frame,'Count:'+str(int(count)),pos,font,height,textcolor,weight)
 
     #Convert fram from BGR to grayscale
     frameGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -42,13 +43,14 @@ while True:
             )
     for (x,y,w,h) in faces:
         #create a bounding box across the detected face
-        cv2.rectangle(frame, (x,y), (x+w,y+h), (255,0,0), 3) #tuple
+        cv2.rectangle(frame, (x,y), (x+w,y+h), boxcolor, 3) #5 parameters - frame, topleftcoords,bottomrightcooords,boxcolor,thickness
         count += 1 # increment count
         # if dataset folder doesnt exist create:
         if not os.path.exists("dataset"):
             os.makedirs("dataset")
         # Save the captured bounded-grayscaleimage into the datasets folder
         cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", frameGray[y:y+h,x:x+w]) #req os
+
     # Display the original frame to the user
     cv2.imshow('FaceCapture', frame)
     # Wait for 30 milliseconds for a key event (extract sigfigs) and exit if 'ESC' or 'q' is pressed
