@@ -2,16 +2,15 @@ import cv2
 import time
 from picamera2 import Picamera2
 
-
 # Create an instance of the PiCamera2 object
 cam = Picamera2()
 #Parameters
 fps=0
 pos=(30,60) #top-left
 font=cv2.FONT_HERSHEY_COMPLEX
-height=1.5
-color=(0,0,255) #BGR- RED
-weight=3
+height=1.5 #font_scale
+color=(0,0,255) #text color, OpenCV operates in BGR- RED
+weight=3   #font-thickness
 
 # Set the resolution of the camera preview
 cam.preview_configuration.main.size = (640, 360)
@@ -24,11 +23,11 @@ cam.start()
 # While loop to continuously capture frames from camera
 while True:
     tStart=time.time()
+
     # Capture a frame from the camera
     frame=cam.capture_array()
     #Display FPS
-    cv2.putText(frame,str(int(fps))+' FPS',pos,font,height,color,weight)
-
+    cv2.putText(frame,str(round(fps))+' FPS',pos,font,height,color,weight)
     # Convert frame from BGR to grayscale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
