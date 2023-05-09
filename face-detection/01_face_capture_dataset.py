@@ -40,6 +40,9 @@ while True:
         #create a bounding box across the detected face
         cv2.rectangle(frame, (x,y), (x+w,y+h), (255,0,0), 3) #tuple
         count += 1 # increment count
+        # if dataset folder doesnt exist create:
+        if not os.path.exists("dataset"):
+            os.makedirs("dataset")
         # Save the captured bounded-grayscaleimage into the datasets folder
         cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", frameGray[y:y+h,x:x+w]) #req os
     # Display the original frame to the user

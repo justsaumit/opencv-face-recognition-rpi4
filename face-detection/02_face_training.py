@@ -26,6 +26,9 @@ print ("\n [INFO] Training faces. It will take a few seconds. Wait ...")
 faces,ids = getImagesAndLabels(path)
 #Train the LBPH recognizer using the face samples and their corresponding labels
 recognizer.train(faces, np.array(ids))
+# if trainer folder doesnt exist create:
+if not os.path.exists("trainer"):
+    os.makedirs("trainer")
 #save the model into trainer/trainer.yml
 recognizer.write('trainer/trainer.yml') 
 # Print the numer of faces trained and then exit the program
