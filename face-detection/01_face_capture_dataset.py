@@ -25,7 +25,6 @@ cam.preview_configuration.align()
 cam.configure("preview")
 cam.start()
 
-# Initialize individual sampling face count
 while True:
     # Capture a frame from the camera
     frame=cam.capture_array()
@@ -35,7 +34,12 @@ while True:
     #Convert fram from BGR to grayscale
     frameGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     #Create a DS faces- array with 4 elements- x,y coordinates top-left corner), width and height
-    faces = face_detector.detectMultiScale(frameGray, 1.3, 5) # 3 parameters- frame,scale-factor,
+    faces = face_detector.detectMultiScale(
+            frameGray,      # The grayscale frame to detect
+            scaleFactor=1.1,# how much the image size is reduced at each image scale-10% reduction
+            minNeighbors=5, # how many neighbors each candidate rectangle should have to retain it
+            minSize=(30, 30)# Minimum possible object size. Objects smaller than this size are ignored.
+            )
     for (x,y,w,h) in faces:
         #create a bounding box across the detected face
         cv2.rectangle(frame, (x,y), (x+w,y+h), (255,0,0), 3) #tuple
