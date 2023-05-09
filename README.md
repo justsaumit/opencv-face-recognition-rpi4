@@ -45,17 +45,14 @@ the image above displays the initial view of our web user interface (webui).
 
 ## TDL
 
-- [ ]  Make folder if it doesn't exist.
+- [x]  Make folder if it doesn't exist.
 - [ ]  Set up WiFi client and access point.
 - [ ]  Install hostapd - WiFi driver (Ubuntu packs in Raspi?)
-- [ ]  Use NGINX/pipe output of FaceRecognizer window for Dash Livestream.
 - [ ]  Integrate Flask for WebUI.
 - [ ]  Address the limitations of Flask.
-- [ ]  Use NGINX + Django.
 - [ ]  Implement login authentication for admin and guest.
 - [ ]  View, add, and remove users from the database.
 - [ ]  Improve LBPH.
-- [ ]  Implement user-defined exception on WebUI for easy troubleshooting.
 
 # Steps to Follow Post-Installation
 
@@ -65,7 +62,15 @@ the image above displays the initial view of our web user interface (webui).
 sudo apt update && sudo apt upgrade
 ```
 
-## 2. Update Firmware
+## 2. Install dependencies
+
+``` bash
+sudo apt install -y python3-libcamera python3-kms++
+sudo apt install -y python3-prctl libatlas-base-dev ffmpeg python3-pip
+```
+
+
+## 3. Update Firmware
 
 After ensuring that the operating system and packages are all up-to-date, we can proceed with updating the firmware using:
 
@@ -82,7 +87,7 @@ sudo reboot
 **Note**: Updating the firmware carries some risks, and it's recommended to create a backup of your data before proceeding with the update (I recommend using sftp or rsync). I am doing this for better performance and stability of the camera module.  
 I'm not enabling Legacy camera support in raspi-config as, for some reason, when it's enabled, it cuts off VNC, and instead of showing the display output, it shows ["Cannot currently show the desktop"](https://i.ytimg.com/vi/GnzRS3AgW5U/maxresdefault.jpg).
 
-## 3. Enable VNC and LCD 16x2 Screen
+## 4. Enable VNC and LCD 16x2 Screen
 
 ### Enable I2C Interface and VNC
 
@@ -102,7 +107,7 @@ sudo raspi-config
 7.  Select "Yes" to enable the interface.
 8.  Reboot the Raspberry Pi.
 
-## 4. Testing the Camera
+## 5. Testing the Camera
 
 1.  Open the terminal on Raspberry Pi.
 2.  Run the command:
@@ -121,7 +126,7 @@ The command **libcamera-jpeg** will capture a still image using the camera modul
 
 **Test image taken by Raspberry Pi Camera Module** (Click on it for full-size)
 
-## 5. Testing the Face-Recognition Application
+## 6. Testing the Face-Recognition Application
 
 To test the camera for the application, follow these steps:
 
@@ -177,7 +182,7 @@ Once the script starts running, it will use the Camera Module to show the captur
 
 9. Press 'Escape' key or 'q' key to quit and stop the script when you are done.
 
-## 6. Install dependencies and test the LCD1602 LCD Display with I2C
+## 7. Install dependencies and test the LCD1602 LCD Display with I2C
 
 1. Install the libraries and i2c-tools package
 ```bash
