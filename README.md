@@ -45,11 +45,13 @@ the image above displays the initial view of our web user interface (webui).
 
 ## TDL
 
+- [x]  Port code from laptop to Raspberry Pi
+- [x]  Rewrite code using PiCamera2 Library
 - [x]  Make folder if it doesn't exist.
-- [ ]  Set up WiFi client and access point.
-- [ ]  Install hostapd - WiFi driver (Ubuntu packs in Raspi?)
 - [ ]  Integrate Flask for WebUI.
-- [ ]  Address the limitations of Flask.
+- [ ]  MJPEG Stream using Flask
+- [ ]  Set up RPi as a WiFi client and access point.
+- [ ]  Install hostapd - WiFi driver (Ubuntu packs in Raspi?)
 - [ ]  Implement login authentication for admin and guest.
 - [ ]  View, add, and remove users from the database.
 - [ ]  Improve LBPH.
@@ -68,7 +70,6 @@ sudo apt update && sudo apt upgrade
 sudo apt install -y python3-libcamera python3-kms++
 sudo apt install -y python3-prctl libatlas-base-dev ffmpeg python3-pip
 ```
-
 
 ## 3. Update Firmware
 
@@ -217,9 +218,6 @@ Command for checking whether driver for **Bus 001 Device 003: ID 2357:010c TP-Li
 ```bash
 lsmod | grep 8188eu
 ```
-
-## NGINX RTMP
-Following this [blog](https://www.nginx.com/blog/video-streaming-for-remote-learning-with-nginx/) by NGINX I'm implementing Live-Feed
 
 # Challenges faced
 ## Installing OpenCV on Raspberry Pi OS 32-bit
