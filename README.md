@@ -2,6 +2,7 @@
 
 ## Introduction
 
+My mini-project for college, which implements Face Recognition using OpenCV on Raspberry Pi 4. Using simple Haar-Cascade and LBPH.The goal is to create a portable solution that can be deployed as a wireless architecture allowing for flexible and convenient use in different environments.
 This project aims to develop a **portable** and **wireless** Face Recognition System (FRS) using Raspberry Pi with a Camera Module attachment. The Raspberry Pi is powered using a power-bank, enabling the development of a portable facial recognition system.  
 The project makes use of the **OpenCV** (Open-source Computer Vision) library, an open-source library for computer vision and machine learning tasks with contributions from more than a thousand developers.  
 We chose to use cascade classifier method specifically Haar cascade object detection for facial detection over TensorFlow due to less complexity, moderate performance, lower system requirements, and better integration.
