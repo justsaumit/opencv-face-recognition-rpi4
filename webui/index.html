@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>Raspberry Pi Face Recognition</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta itemprop="name" content="Raspberry Pi Face Recognition">
+        <meta itemprop="description" content="My Mini Project">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body id="page">
+        <div id="spotlight" class="animated fadeIn">
+            <div id="home-center">
+                <h1 id="home-title">Raspberry Pi Face Recognition</h1>
+                <p id="home-subtitle">This project aims to develop a portable and wireless Face Recognition System (FRS) using Raspberry Pi with a Camera Module attachment.</p>
+                <nav id="home-nav" class="site-nav">
+                    <a href="/live">Live-feed</a>
+                    <a href="/login">Login</a>
+                </nav>
+                <button id="button1" class="buttonclick" role="button">1. Input Face</button>
+                <button id="button2" class="buttonclick" role="button">2. Train Model</button>
+                <button id="button3" class="buttonclick" role="button">3. Face Recognizer</button>
+            </div>
+
+            <div id="home-social">
+                <a href="https://github.com/justsaumit/opencv-face-recognition" target="_blank" rel="noopener me" title="github">
+                <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+            </div>
+
+            <div id="home-footer">
+                <p>&copy; 2023 <a href="https://draconyan.xyz/">TEAM 3 - Meer Junaid, Bikram Kumar Poddar, Saumit Dinesan</a></p>
+            </div>
+        </div>
+
+        <script src="main.js"></script>
+
+        <!-- Math rendering -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, { delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}] });"></script>
+        <link href="https://unpkg.com/highlightjs-badge/highlightjs/styles/railscasts.css" rel="stylesheet">
+        <script src="https://unpkg.com/highlightjs-badge/highlightjs/highlight.pack.js"></script>
+        <script src="https://unpkg.com/highlightjs-badge/highlightjs-badge.min.js"></script>
+        <script>
+            var pres = document.querySelectorAll("pre>code");
+            for (var i = 0; i < pres.length; i++) {
+                hljs.highlightBlock(pres[i]);
+            }
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+        <script>
+            var options = {
+                copyIconClass: "gg-clipboard",
+                checkIconClass: "gg-check"
+            };
+            window.highlightJsBadge(options);
+        </script>
+    </body>
+</html>
