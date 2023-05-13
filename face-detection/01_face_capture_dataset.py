@@ -42,7 +42,7 @@ while True:
             scaleFactor=1.1,# how much the image size is reduced at each image scale-10% reduction
             minNeighbors=5, # how many neighbors each candidate rectangle should have to retain it
             minSize=(30, 30)# Minimum possible object size. Objects smaller than this size are ignored.
-            )
+    )
     for (x,y,w,h) in faces:
         # Create a bounding box across the detected face
         cv2.rectangle(frame, (x,y), (x+w,y+h), BOXCOLOR, 3) # 5 parameters - frame, topleftcoords,bottomrightcooords,boxcolor,thickness
@@ -51,8 +51,15 @@ while True:
         # if dataset folder doesnt exist create:
         if not os.path.exists("dataset"):
             os.makedirs("dataset")
-        # Save the captured bounded-grayscaleimage into the datasets folder
-        cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", frameGray[y:y+h,x:x+w])
+        # Save the captured bounded-grayscaleimage into the datasets folder only if the same file doesn't exist
+        file_path = os.path.join("dataset", f"User.{face_id}.{count}.jpg")
+        if os.path.exists(file_path):
+            # Move the existing file to the "old_dataset" folder
+            old_file_path = file_path.replace("dataset", "old_dataset")
+            os.rename(file_path, old_file_path)
+        # Write the newer images after moving the old images
+        cv2.imwrite(file_path, frame_gray[y:y+h, x:x+w])
+
 
     # Display the original frame to the user
     cv2.imshow('FaceCapture', frame)
@@ -63,8 +70,8 @@ while True:
         break
     elif key == 113:  # q key
         break
-    elif count >= COUNT_LIMIT: # Take COUNT_LIMIT face sample and stop video capture
-         break
+    elif count >= COUNT_LIMIT: # Take COUNT_LIMIT face samples and stop video capture
+        break
 
 # Release the camera and close all windows
 print("\n [INFO] Exiting Program and cleaning up stuff")
