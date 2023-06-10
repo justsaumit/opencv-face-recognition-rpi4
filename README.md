@@ -49,8 +49,8 @@ the image above displays the initial view of our web user interface (webui).
 - [x]  Port code from laptop to Raspberry Pi
 - [x]  Rewrite code using PiCamera2 Library
 - [x]  Make folder if it doesn't exist.
-- [ ]  Integrate Flask for WebUI.
-- [ ]  MJPEG Stream using Flask
+- [x]  Integrate Flask for WebUI.
+- [x]  MJPEG Stream using Flask
 - [ ]  Set up RPi as a WiFi client and access point.
 - [ ]  Install hostapd - WiFi driver (Ubuntu packs in Raspi?)
 - [ ]  Implement login authentication for admin and guest.
